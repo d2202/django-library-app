@@ -45,6 +45,16 @@ class Book(models.Model):
         return reverse('book-detail', args=[str(self.id)])
 
 
+    def display_genre(self):
+        '''
+        Возвращает строку из первых трёх жанров (если они существуют)
+        нужно для отображения в админке.
+        '''
+        return ', '.join([genre.name for genre in self.genre.all()[:3] ])
+
+    display_genre.short_description = 'Genre'
+
+
 class BookInstance(models.Model):
     '''
     Модель для отдельного экзепляра книги
